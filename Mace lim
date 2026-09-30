@@ -1,0 +1,28 @@
+"
+plugins {
+    java
+}
+
+group = "dev.macelimit"
+version = "1.0.0"
+
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+}
+
+dependencies {
+    // Если сборка не находит эту версию, замени на актуальную с https://repo.papermc.io
+    compileOnly("io.papermc.paper:paper-api:26.2-snapshot-1.build.2-alpha")
+}
+
+java {
+    // Если у тебя другая версия JDK - поменяй число.
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+}
+
+tasks.processResources {
+    filesMatching("plugin.yml") {
+        expand("version" to project.version)
+    }
+}
